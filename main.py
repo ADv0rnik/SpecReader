@@ -22,7 +22,9 @@ try:
         counts_in_chanel[a] = counts[a]
     # for key, value in d.items():
     #     print(key, value)
-    # #print(date_mea)
+    for i in l:
+        print(i)
+    #print(date_mea)
     #print(cps)
     #print(num_of_chanels)
 except IOError:
