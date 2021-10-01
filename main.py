@@ -1,5 +1,5 @@
 '''
-version 0.9
+version 0.9.1
 by Aliaksandr Dvornik
 '''
 
@@ -10,7 +10,7 @@ try:
     inf = open('spec.spe', 'r')
     l = [line.strip() for line in inf]
     del l[:7]
-#print(type(l))
+
     for i in l:
         date_mea = l[1]
         cps = float(l[5])
