@@ -21,10 +21,11 @@ try:
     counts = [l[i] for i in range(1, num_of_chanels+2)]
     for a in range(1, num_of_chanels):
         counts_in_chanel[a] = counts[a]
+    del l[:1025]
     # for key, value in counts_in_chanel.items():
     #     print(key, value)
-    # for i in l:
-    #     print(i)
+    for i in l:
+        print(i)
     # print(time)
     # print(date_mea)
     # print(cps)
