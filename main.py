@@ -17,8 +17,8 @@ try:
         cps = float(l[5])
         #print(i)
     del l[:15]
-    num_of_chanels = int(l[0].split()[1])+1
-    counts = [l[i] for i in range(1, num_of_chanels+2)]
+    num_of_chanels = int(l[0].split()[1])+1 # reading number of chanels
+    counts = [l[i] for i in range(1, num_of_chanels+2)] # reading counts in each chanel
     for a in range(1, num_of_chanels):
         counts_in_chanel[a] = counts[a]
     del l[:1025]
