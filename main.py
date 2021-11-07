@@ -5,6 +5,7 @@ by Aliaksandr Dvornik
 
 #read spectrum file
 counts = []
+energy_list=[]
 counts_in_chanel={}
 try:
     inf = open('spec.spe', 'r')
@@ -21,11 +22,16 @@ try:
     counts = [l[i] for i in range(1, num_of_chanels+2)] # reading counts in each chanel
     for a in range(1, num_of_chanels):
         counts_in_chanel[a] = counts[a]
-    del l[:1025]
+    del l[:1031]
+    en = [l[i].split() for i in range(0, num_of_chanels)]
+    for elem in en:
+        energy_list.append(elem[1])
     # for key, value in counts_in_chanel.items():
     #     print(key, value)
-    for i in l:
-        print(i)
+
+    for i in range(len(energy_list)):
+        print(energy_list[i], end ='\n')
+
     # print(time)
     # print(date_mea)
     # print(cps)
