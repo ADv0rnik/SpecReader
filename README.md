@@ -1,2 +1,2 @@
 # SpecReader
-Utility for reading spectrum from radiation detection device. 
+The utility for reading spectrum from radiation detection device. 
