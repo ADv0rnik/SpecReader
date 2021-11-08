@@ -1,8 +1,5 @@
 class Parser:
-    """
-    version 0.9.1
-    by Aliaksandr Dvornik
-    """
+# TODO: add more functions
     def __init__(self, fileName):
         self.fileName = fileName
         self.fin = open(fileName, 'r')
@@ -10,6 +7,16 @@ class Parser:
     def get_lines(self):
         line = [l.strip() for l in self.fin]
         return line
+
+    def get_param(self, line):
+        date_mea = ' '
+        time = 0
+        cps = 0.0
+        for i in line:
+            date_mea = line[1]
+            time = int(line[3].split()[0])
+            cps = float(line[5])
+        return date_mea, time, cps
 
 #read spectrum file
 counts = []
