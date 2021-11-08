@@ -2,7 +2,7 @@
 executive file
 to be continued...
 """
-from spec_pars import Parser
+from data.spec_pars import Parser
 
 if __name__ == '__main__':
     fname = 'spec.spe'
