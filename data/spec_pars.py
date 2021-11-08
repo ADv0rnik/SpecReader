@@ -2,19 +2,20 @@ class Parser:
     """
     This class define all main functions to parse the spectrum file
     """
-    def __init__(self, fileName):
-        self.fileName = fileName
-        self.fin = open(fileName, 'r')
+    def __init__(self, file_name):
+        self.fileName = file_name
+        self.fin = open(file_name, 'r')
 
     def get_lines(self):
         line = [l.strip() for l in self.fin]
         return line
 
-    def get_param(self, line):
+    @staticmethod
+    def get_param(line):
         date_mea = ' '
         time = 0
         cps = 0.0
-        for i in line:
+        for _ in line:
             date_mea = line[1]
             time = int(line[3].split()[0])
             cps = float(line[5])
