@@ -18,6 +18,12 @@ class Parser:
             cps = float(line[5])
         return date_mea, time, cps
 
+    def remove_lines(self, line, n):
+        del line[:n]
+
+
+
+
 #read spectrum file
 counts = []
 energy_list=[]
