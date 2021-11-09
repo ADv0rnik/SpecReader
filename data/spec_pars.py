@@ -4,11 +4,11 @@ class Parser:
     """
     def __init__(self, file_name):
         self.fileName = file_name
-        self.fin = open(file_name, 'r')
 
     def get_lines(self):
-        line = [l.strip() for l in self.fin]
-        return line
+        with open(self.fileName, "r") as f:
+            line = [l.strip() for l in f]
+            return line
 
     @staticmethod
     def get_param(line):
