@@ -29,5 +29,13 @@ pars.remove_lines(line, 1030)
 energy = pars.get_energy_list(line, num_of_channels)
 
 # create data frame
+df = DfConstructor()
+df.get_dataframe(energy,counts,time)
+
+# create GUI
 root = tk.Tk()
 
+canvas = tk.Canvas(root, width= 800, height=600)
+canvas.grid(columnspan=3)
+
+root.mainloop()
