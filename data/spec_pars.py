@@ -25,12 +25,12 @@ class Parser:
         del line[:n]
 
     def get_counts(self, line, n):
-        counts = [line[i] for i in range(0, n + 1)]
+        counts = [int(line[i]) for i in range(0, n + 1)]
         return counts
 
     def get_energy_list(self, line, n):
         energy_list = []
         en = [line[i].split() for i in range(0, n+1)]
         for elem in en:
-            energy_list.append(elem[1])
+            energy_list.append(int(elem[1]))
         return energy_list
