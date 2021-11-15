@@ -2,7 +2,7 @@
 version 0.9.1
 by Aliaksandr Dvornik
 """
-import tkinter as tk
+
 from data.spec_pars import Parser
 from data.df_constructor import DfConstructor
 
