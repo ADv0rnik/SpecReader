@@ -6,11 +6,26 @@ class Parser:
     This class define all main functions to parse the spectrum file
     """
 
-    def __init__(self, file_name):
-        self.fileName = file_name
+    def __init__(self, file_name, mode):
+        self.file_name = file_name
+        self.mode = mode
+
+    def __enter__(self):
+        try:
+            self.file_obj = open(self.file_name, self.mode)
+        except FileNotFoundError as error:
+            print(error)
+        else:
+            return self.file_obj
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if isinstance(exc_val, (FileNotFoundError)):
+            print(f" An exception message: {exc_val}")
+            return True
+
 
     def get_lines(self):
-        with open(self.fileName, "r") as f:
+        with open(self.file_name, "r") as f:
             line = [l.strip() for l in f]
         return line
 
@@ -47,7 +62,7 @@ class Parser:
 
 num_of_channels = 1023
 
-fname = "C:\\Users\\aadvo\\PycharmProjects\\SpecReader\\spec.spe"
+fname = "C:\\Users\\aadvo\\PycharmProjects\\spec-reader\\spec.spe"
 
 # match = re.search(r'\d{2}/\d{2}/\d{4}', line)
 # if match:
