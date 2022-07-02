@@ -1,9 +1,0 @@
-__pyache__/
-env
-.idea/
-/dist/
-
-/*.egg-info
-*.pyc
-
-.gitignore
