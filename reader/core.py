@@ -1,3 +1,6 @@
+from reader.log_writer import write_logs
+import time
+
 NUM_CHANNELS = 1023
 
 
@@ -72,7 +75,9 @@ class DataLoader:
 
     @property
     def all_params(self):
-        print()
+        print("[+] Fetching parameters...")
+        write_logs("Fetching parameters", "info")
+        time.sleep(1)
         return self.__all_params
 
 
@@ -86,8 +91,12 @@ class DataInterface:
     def process_data(self, specfile: str, mode="r"):
         try:
             with open(specfile, mode) as file:
+                print("[+] Opening spectrum file")
+                write_logs("Opening spectrum file", "info")
+                time.sleep(1)
                 self.__data_loader.set_all_parameters(file)
         except FileNotFoundError as err:
-            print(err)
+            print(f"[-] An error occurred: {err}")
+            write_logs(f"{err}", 'error')
         else:
             return self.__data_loader.all_params
