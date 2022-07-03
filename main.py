@@ -1,33 +1,18 @@
 """
-version 0.9.1
+version 0.2
 by Aliaksandr Dvornik
 """
 
-from reader.core import Parser
-from reader.df_constructor import DfConstructor
+import os
+from reader.core import DataInterface
 
-num_of_channels = 1023
 
-fname = 'spec.spe'
-pars = Parser(fname)
+file_path = os.path.join(os.path.dirname(__file__), 'sample.spe')
 
-# read spectrum file
-line = pars.get_lines()
-pars.remove_lines(line, 7)
 
-# get reader from spectrum file
-date_mea = pars.get_param(line)[0]  # date of measurements
-time = pars.get_param(line)[1]  # time of measurements
-cps = pars.get_param(line)[2]  # total counts per second
-pars.remove_lines(line, 16)
-
-# get list of counts per channel
-counts = pars.get_counts(line, num_of_channels)
-pars.remove_lines(line, 1030)
-
-# get list of energy
-energy = pars.get_energy_list(line, num_of_channels)
-
-# create reader frame
-df = DfConstructor()
-df.get_dataframe(energy,counts,time)
+if __name__ == "__main__":
+    try:
+        data_int = DataInterface()
+        data_int.process_data(file_path)
+    except FileNotFoundError as err:
+        print(err)
