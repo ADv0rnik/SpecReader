@@ -1,8 +1,12 @@
-from reader.log_writer import write_logs
+import pandas as pd
 import time
+import os
+
+from reader.log_writer import write_logs
 
 NUM_CHANNELS = 1023
-
+OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__)).replace("/reader", "/output")
+FILE_PATH = OUTPUT_DIR + "/spec_data.csv"
 
 class DataProcessor:
     """
@@ -73,6 +77,15 @@ class DataLoader:
     def set_all_parameters(self, file):
         self.__all_params = self.__data_processor.get_param(file)
 
+    def get_dataframe(self, data):
+        energy = data[4]
+        counts = data[3]
+        time_of_mea = data[1]
+        df = pd.Series(energy, counts).to_frame().reset_index()
+        df.columns = ['Energy', 'Counts']
+        df['CPS'] = df['Counts'] / int(time_of_mea)
+        return df
+
     @property
     def all_params(self):
         print("[+] Fetching parameters...")
@@ -100,3 +113,8 @@ class DataInterface:
             write_logs(f"{err}", 'error')
         else:
             return self.__data_loader.all_params
+
+    def spec_to_dataframe(self, clean_data: tuple):
+        dataframe = self.__data_loader.get_dataframe(clean_data)
+        dataframe.to_csv(FILE_PATH)
+        write_logs("Converting complete", "info")

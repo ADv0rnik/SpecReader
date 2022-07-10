@@ -16,5 +16,8 @@ if __name__ == "__main__":
     write_logs("Start programme")
     time.sleep(1)
     data_int = DataInterface()
-    data_int.process_data(file_path)
+    cleaned_data = data_int.process_data(file_path)
+    data_int.spec_to_dataframe(cleaned_data)
+    time.sleep(1)
+    print("[+] Converting complete")
 
