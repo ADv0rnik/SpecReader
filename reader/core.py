@@ -8,12 +8,22 @@ NUM_CHANNELS = 1023
 OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__)).replace("/reader", "/output")
 FILE_PATH = OUTPUT_DIR + "/spec_data.csv"
 
+
 class DataProcessor:
     """
     This class define all main functions to parse the spectrum file
     """
     @staticmethod
     def __convert_values(value):
+        """
+        Simple static method to convert values of string or integer into float
+        Parameters:
+        -----------
+        value: value of any type to be converted
+        Returns
+        -------
+        value: float, float value
+        """
         return float(value)
 
     @staticmethod
@@ -78,6 +88,15 @@ class DataLoader:
         self.__all_params = self.__data_processor.get_param(file)
 
     def get_dataframe(self, data):
+        """
+        Method convert cleaned data from spectrum file to dataframe using pandas library
+        Parameters:
+        -----------
+        data: tuple, cleaned data to be processed
+        Returns:
+        -------
+        df: pandas object
+        """
         energy = data[4]
         counts = data[3]
         time_of_mea = data[1]
