@@ -17,12 +17,9 @@ class DataProcessor:
     def __convert_values(value):
         """
         Simple static method to convert values of string or integer into float
-        Parameters:
-        -----------
-        value: value of any type to be converted
-        Returns
-        -------
-        value: float, float value
+
+        :param value: value of any type to be converted
+        :returns: value - float value
         """
         return float(value)
 
@@ -30,30 +27,27 @@ class DataProcessor:
     def __get_lines(file):
         """
         Method allows to read lines from the spectrum file
-        Returns
-        -------
-        lines: list[str], batch of lines from spectrum file
+
+        :returns: lines, batch of lines from spectrum file (list[str])
         """
         lines = [line.strip() for line in file]
         return lines
 
-    def get_param(self, file, n=NUM_CHANNELS):
+    def get_param(self, lines, n=NUM_CHANNELS):
         """
-        The method parse all necessary parameters (see Returns description below) from the spectrum file
-        Parameters:
-        -----------
-        line: string, batch of strings from spectrum file
-        n: int, number of channels
-        Returns:
-        -------
-        date_mea: string, date of measurements
-        time: int, duration of measurements performed in seconds
-        cps: float, counts per second
-        counts: list[int], an overall number of counts per channel obtained
-                within one single measurement
-        energy_list: list[int], an energy value in each single channel
+        The method parse all required parameters (see Returns description below) from the spectrum file
+
+        :param lines: string, batch of strings from spectrum file
+        :param n: int, number of channels. By default, is 1023
+
+        :returns: date_mea - string, date of measurements
+                  time - int, duration of measurements performed in seconds
+                  cps - float, counts per second
+                  counts - list[int], an overall number of counts per channel obtained
+                           within one single measurement
+                  energy_list - list[int], an energy value in each single channel
         """
-        lines = self.__get_lines(file)
+        lines = self.__get_lines(lines)
         date_mea = ''
         time_mea = 0
         cps = 0.0
@@ -87,15 +81,13 @@ class DataLoader:
     def set_all_parameters(self, file):
         self.__all_params = self.__data_processor.get_param(file)
 
-    def get_dataframe(self, data):
+    @staticmethod
+    def get_dataframe(data):
         """
-        Method convert cleaned data from spectrum file to dataframe using pandas library
-        Parameters:
-        -----------
-        data: tuple, cleaned data to be processed
-        Returns:
-        -------
-        df: pandas object
+        Method converts cleaned data from spectrum file to dataframe using pandas library.
+
+        :param data: cleaned data to be processed (tuple)
+        :returns: df - pandas object
         """
         energy = data[4]
         counts = data[3]
