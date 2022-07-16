@@ -1,8 +1,10 @@
 import pandas as pd
 import time
 import os
+from tqdm import tqdm
 
 from reader.log_writer import write_logs
+from reader.exceptions import NoArgumentException
 
 NUM_CHANNELS = 1023
 OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__)).replace("/reader", "/output")
@@ -53,20 +55,34 @@ class DataProcessor:
         cps = 0.0
         energy_list, counts = [], []
         try:
+            print("[+] Fetching parameters...")
+            write_logs("Fetching parameters", "info")
+            time.sleep(1)
+            pbar = tqdm(total=5, bar_format='{l_bar}{bar:20}{r_bar}{bar:-20b}', colour="green")
             for a, i in enumerate(lines):
                 if i == "$DATE_MEA:":
                     date_mea = lines[a + 1]
+                    pbar.update(1)
+                    time.sleep(0.5)
                     continue
                 if i == "$MEAS_TIM:":
                     time_mea = lines[a + 1].split()
+                    pbar.update(1)
+                    time.sleep(0.5)
                     continue
                 if i == "$CPS:":
                     cps = lines[a + 1]
+                    pbar.update(1)
+                    time.sleep(0.5)
                     continue
                 if i == '$DATA:':
                     counts = [int(lines[a + 1]) for a in range(a + 1, n + (a + 2))]
+                    pbar.update(1)
+                    time.sleep(0.5)
                 if i == '$ENER_TABLE:':
                     energy_list = [int(elem[1]) for elem in [lines[a + 1].split() for a in range(a + 1, n + a + 2)]]
+                    pbar.update(1)
+                    time.sleep(0.5)
         except ValueError as error:
             print(error)
         else:
@@ -99,9 +115,6 @@ class DataLoader:
 
     @property
     def all_params(self):
-        print("[+] Fetching parameters...")
-        write_logs("Fetching parameters", "info")
-        time.sleep(1)
         return self.__all_params
 
 
@@ -126,6 +139,10 @@ class DataInterface:
             return self.__data_loader.all_params
 
     def spec_to_dataframe(self, clean_data: tuple):
-        dataframe = self.__data_loader.get_dataframe(clean_data)
-        dataframe.to_csv(FILE_PATH)
-        write_logs("Converting complete", "info")
+        try:
+            dataframe = self.__data_loader.get_dataframe(clean_data)
+            dataframe.to_csv(FILE_PATH)
+            write_logs("End program", "info")
+        except TypeError as t_err:
+            print(f"[-] An error occurred: {t_err}")
+            write_logs(f"{t_err}", 'error')

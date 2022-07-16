@@ -4,6 +4,7 @@ by Aliaksandr Dvornik
 """
 
 import os
+import sys
 import time
 import argparse
 
@@ -11,13 +12,9 @@ from reader.core import DataInterface
 from reader.log_writer import write_logs
 
 
-FILE_PATH = os.path.join(os.path.dirname(__file__), 'sample.spe')
-
-
 def parse_arguments():
     parser = argparse.ArgumentParser(description="List of commands for SpecReader",
-                                     epilog="Report about all bugs to aadvornik@gmail.com",
-                                     exit_on_error=False)
+                                     epilog="Report about all bugs to aadvornik@gmail.com")
     parser.add_argument(
         "-v",
         "--version",
@@ -31,18 +28,38 @@ def parse_arguments():
         type=str,
         help='The path to spectrum file'
     )
+    return parser.parse_args()
 
 
 def runner():
-    pass
+    """
+    The method runs program common functionality starting with checking of CLI arguments.
+    It uses DataInterface to get parameters from the spectrum file.
+
+    :returns: None
+    """
+    try:
+        args = parse_arguments()
+    except argparse.ArgumentError as err:
+        print(f"Wrong argument: {err}")
+        write_logs(f"{err}. End program", 'error')
+        sys.exit()
+    else:
+        file = args.Path
+        if os.path.isfile(file):
+            write_logs("Start program")
+            data_int = DataInterface()
+            cleaned_data = data_int.process_data(file)
+            data_int.spec_to_dataframe(cleaned_data)
+        else:
+            print("[-] Incorrect path or file doesn't exist")
+            write_logs("Incorrect path or file doesn't exist", 'error')
+            sys.exit()
 
 
 if __name__ == "__main__":
-    print("[+] Run programme")
-    write_logs("Start programme")
+    print("[+] Run program")
     time.sleep(1)
-    data_int = DataInterface()
-    cleaned_data = data_int.process_data(FILE_PATH)
-    data_int.spec_to_dataframe(cleaned_data)
+    runner()
     time.sleep(1)
-    print("[+] Converting complete")
+    print("[+] End program")
