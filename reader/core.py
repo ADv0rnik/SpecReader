@@ -4,7 +4,6 @@ import os
 from tqdm import tqdm
 
 from reader.log_writer import write_logs
-from reader.exceptions import NoArgumentException
 
 NUM_CHANNELS = 1023
 OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__)).replace("/reader", "/output")

@@ -13,6 +13,13 @@ from reader.log_writer import write_logs
 
 
 def parse_arguments():
+    """
+    The method determines parser for arguments derived from the CLI.
+    Defines all optional and positional arguments such as path, --version and --figure
+
+    :returns: arguments passed on CLI script call
+
+    """
     parser = argparse.ArgumentParser(description="List of commands for SpecReader",
                                      epilog="Report about all bugs to aadvornik@gmail.com")
     parser.add_argument(
@@ -21,6 +28,12 @@ def parse_arguments():
         help="Show this application's version and exit",
         action="version",
         version="SpecReader v.0.2"
+    )
+    parser.add_argument(
+        "-f",
+        "--figure",
+        help="Enable option to represent data in one figure",
+        action="store"
     )
     parser.add_argument(
         "Path",
