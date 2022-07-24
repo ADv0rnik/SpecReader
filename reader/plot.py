@@ -2,7 +2,10 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import os
 
-FILE_PATH = os.path.dirname(os.path.abspath(__file__)).replace("/reader", "/output")
+from datetime import datetime
+
+FILE_PATH = os.path.dirname(os.path.abspath(__file__)).replace("/reader", "/output/")
+CURRENT_DATE = datetime.strftime(datetime.now(), '%Y-%m-%d')
 
 
 class Plot:
@@ -38,7 +41,7 @@ class Plot:
 
     @staticmethod
     def save_plot():
-        plt.savefig(FILE_PATH, dpi=300)
+        plt.savefig(FILE_PATH + f"spectrum_{CURRENT_DATE}.png", dpi=300)
 
 
 

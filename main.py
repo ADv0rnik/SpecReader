@@ -33,9 +33,9 @@ def parse_arguments():
     parser.add_argument(
         "-p",
         "--plot",
-        metavar='plot',
-        help="Enable option to show data on plot",
-        action="store"
+        help="Enable this option to show data on plot",
+        action="store_true",
+        default=''
     )
     parser.add_argument(
         "Path",
