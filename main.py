@@ -1,5 +1,5 @@
 """
-version 0.2
+version 0.3
 by Aliaksandr Dvornik
 """
 
@@ -10,12 +10,13 @@ import argparse
 
 from reader.core import DataInterface
 from reader.log_writer import write_logs
+from reader.plot import Plot
 
 
 def parse_arguments():
     """
     The method determines parser for arguments derived from the CLI.
-    Defines all optional and positional arguments such as path, --version and --figure
+    Defines all optional and positional arguments such as path, --version and --plot
 
     :returns: arguments passed on CLI script call
 
@@ -30,9 +31,10 @@ def parse_arguments():
         version="SpecReader v.0.2"
     )
     parser.add_argument(
-        "-f",
-        "--figure",
-        help="Enable option to represent data in one figure",
+        "-p",
+        "--plot",
+        metavar='plot',
+        help="Enable option to show data on plot",
         action="store"
     )
     parser.add_argument(
@@ -60,10 +62,16 @@ def runner():
     else:
         file = args.Path
         if os.path.isfile(file):
+            print("[+] Run program")
+            time.sleep(1)
             write_logs("Start program")
             data_int = DataInterface()
             cleaned_data = data_int.process_data(file)
             data_int.spec_to_dataframe(cleaned_data)
+            if args.plot:
+                plot = Plot()
+                plot.make_plot()
+                plot.save_plot()
         else:
             print("[-] Incorrect path or file doesn't exist")
             write_logs("Incorrect path or file doesn't exist", 'error')
@@ -71,8 +79,6 @@ def runner():
 
 
 if __name__ == "__main__":
-    print("[+] Run program")
-    time.sleep(1)
     runner()
     time.sleep(1)
     print("[+] End program")

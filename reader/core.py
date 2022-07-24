@@ -108,7 +108,7 @@ class DataLoader:
         counts = data[3]
         time_of_mea = data[1]
         df = pd.Series(energy, counts).to_frame().reset_index()
-        df.columns = ['Energy', 'Counts']
+        df.columns = ['Counts', 'Energy']
         df['CPS'] = df['Counts'] / int(time_of_mea)
         return df
 
@@ -124,7 +124,7 @@ class DataInterface:
     def __init__(self):
         self.__data_loader = DataLoader()
 
-    def process_data(self, specfile: str, mode="r"):
+    def process_data(self, specfile: str, mode="r") -> tuple:
         try:
             with open(specfile, mode) as file:
                 print("[+] Opening spectrum file")
