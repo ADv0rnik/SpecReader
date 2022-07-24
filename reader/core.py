@@ -38,7 +38,7 @@ class DataProcessor:
         """
         The method parse all required parameters (see Returns description below) from the spectrum file
 
-        :param lines: string, batch of strings from spectrum file
+        :param lines: list, list of strings from spectrum file
         :param n: int, number of channels. By default, is 1023
 
         :returns: date_mea - string, date of measurements
