@@ -12,7 +12,7 @@ class ReaderTests(unittest.TestCase):
         self.data_interface = DataInterface()
 
     def test_get_params(self):
-        with open("sample.spe", "r") as testdata:
+        with open("tests/sample_0.spe", "r") as testdata:
             result = self.data_processor.get_param(lines=testdata.readlines())
             self.assertIsInstance(result, tuple)
 
@@ -24,7 +24,7 @@ class ReaderTests(unittest.TestCase):
     def test_get_params_err(self):
         try:
             with open("tests/sample_1.spe", "r") as testdata:
-                result = self.data_processor.get_param(lines=testdata.readlines())
+                self.data_processor.get_param(lines=testdata.readlines())
         except ValueError as e:
             self.assertEqual(type(e), ValueError)
 
@@ -33,5 +33,3 @@ class ReaderTests(unittest.TestCase):
             self.data_interface.process_data("sample_2.spe", mode="r")
         except FileNotFoundError as e:
             self.assertEqual(type(e), FileNotFoundError)
-
-
