@@ -12,7 +12,7 @@ class ReaderTests(unittest.TestCase):
         self.data_interface = DataInterface()
 
     def test_get_params(self):
-        with open("sample.spe", "r") as testdata:
+        with open("tests/sample_0.spe", "r") as testdata:
             result = self.data_processor.get_param(lines=testdata.readlines())
             self.assertIsInstance(result, tuple)
 
