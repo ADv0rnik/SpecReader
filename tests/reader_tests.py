@@ -1,4 +1,4 @@
-from reader.core import DataProcessor, DataLoader
+from reader.core import DataProcessor, DataLoader, DataInterface
 import unittest
 
 CLEANED_DATA = (
@@ -92,6 +92,7 @@ class ReaderTests(unittest.TestCase):
     def setUp(self):
         self.data_processor = DataProcessor()
         self.data_loader = DataLoader()
+        self.data_interface = DataInterface()
 
     def test_get_params(self):
         with open("sample.spe", "r") as testdata:
@@ -102,5 +103,18 @@ class ReaderTests(unittest.TestCase):
         result = len(self.data_loader.get_dataframe(CLEANED_DATA))
         expected_resul = 1024
         self.assertEqual(result, expected_resul)
+
+    def test_get_params_err(self):
+        try:
+            with open("sample_1.spe", "r") as testdata:
+                result = self.data_processor.get_param(lines=testdata.readlines())
+        except ValueError as e:
+            self.assertEqual(type(e), ValueError)
+
+    def test_process_data(self):
+        try:
+            self.data_interface.process_data("sample_2.spe", mode="r")
+        except FileNotFoundError as e:
+            self.assertEqual(type(e), FileNotFoundError)
 
 
