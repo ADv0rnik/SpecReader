@@ -9,5 +9,6 @@ The spec-reader is presented in form of CLI application. Current version of the 
 
 ### Requirements
 
-
-
+The spec-reader require Python version 3.8 or older. 
+...
+ 
