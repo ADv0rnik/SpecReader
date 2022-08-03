@@ -4,21 +4,19 @@ with open("README.md", "r", encoding="utf-8") as readme:
     long_description = readme.read()
 
 setup(name='spec-reader',
-      version='0.3',
+      version='0.1.1',
       description='The spectrum reader',
       long_description=long_description,
+      long_description_content_type="text/markdown",
       url='https://github.com/ADv0rnik/SpecReader.git',
-      author='Aliaksandr Dvornik',
+      author='Alex Dvornik',
       author_email='aadvornik@gmail.com',
       license='MIT',
-      keywords="reader spectrum",
-      packages=find_packages(exclude=['tests*']),
-      include_package_data=True,
+      keywords="reader spectrum radiation",
+      packages=find_packages(),
+      package_data={"reader": ['*.spe']},
       install_requires=['matplotlib', 'pandas', 'art'],
-      package_data={
-          "sample": ['sample.spe']
-      },
       entry_points={
-            "console_scripts": ['sreader=main.py']
+            "console_scripts": ['spec-reader=reader:runner']
       },
       zip_safe=False)

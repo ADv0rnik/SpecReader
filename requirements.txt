@@ -1,5 +1,5 @@
 art==5.6
 pandas==1.4.3
-pipenv==2021.11.23
 pytest==7.1.2
 matplotlib==3.5.2
+logging==0.4.9.6
