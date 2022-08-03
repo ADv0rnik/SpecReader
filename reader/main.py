@@ -8,9 +8,9 @@ import sys
 import time
 import argparse
 
-from reader.core import DataInterface
-from reader.log_writer import write_logs
-from reader.plot import Plot
+from reader.reader_core import DataInterface
+from reader.reader_logger import write_logs
+from reader.reader_plot import Plot
 
 
 def parse_arguments():
@@ -21,7 +21,8 @@ def parse_arguments():
     :returns: arguments passed on CLI script call
 
     """
-    parser = argparse.ArgumentParser(description="List of commands for SpecReader",
+    parser = argparse.ArgumentParser(prog='spec-reader',
+                                     description="List of commands for SpecReader",
                                      epilog="Report about all bugs to aadvornik@gmail.com")
     parser.add_argument(
         "-v",
