@@ -1,3 +1,5 @@
+![GitHub repo file count](https://img.shields.io/github/directory-file-count/ADv0rnik/SpecReader?style=flat-square)
+
 ## SpecReader
 ### General information
 The Spec-reader utility was designed to read spectrum data (in .spe format) from radiation detection device produced by 
