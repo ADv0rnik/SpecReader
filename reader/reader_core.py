@@ -3,11 +3,11 @@ import time
 import os
 from tqdm import tqdm
 
+from . import DATA_DIR
 from reader.reader_logger import write_logs
 
 NUM_CHANNELS = 1023
-OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__)).replace("/reader", "/output")
-FILE_PATH = OUTPUT_DIR + "/spec_data.csv"
+FILE_PATH = DATA_DIR + "/spec_data.csv"
 
 
 class DataProcessor:

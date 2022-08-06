@@ -73,6 +73,7 @@ def runner():
                 plot = Plot()
                 plot.make_plot()
                 plot.save_plot()
+            print("[+] End program")
         else:
             print("[-] Incorrect path or file doesn't exist")
             write_logs("Incorrect path or file doesn't exist", 'error')
@@ -81,5 +82,3 @@ def runner():
 
 if __name__ == "__main__":
     runner()
-    time.sleep(1)
-    print("[+] End program")

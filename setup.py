@@ -3,8 +3,11 @@ from setuptools import setup, find_packages
 with open("README.md", "r", encoding="utf-8") as readme:
     long_description = readme.read()
 
+with open("requirements.txt", "r", encoding="utf-8") as req:
+    requires = req.read()
+
 setup(name='spec-reader',
-      version='0.1.1',
+      version='0.1.4',
       description='The spectrum reader',
       long_description=long_description,
       long_description_content_type="text/markdown",
@@ -14,9 +17,9 @@ setup(name='spec-reader',
       license='MIT',
       keywords="reader spectrum radiation",
       packages=find_packages(),
-      package_data={"reader": ['*.spe']},
-      install_requires=['matplotlib', 'pandas', 'art'],
+      package_data={"reader": ['*.spe', 'data/*']},
+      install_requires=requires,
       entry_points={
-            "console_scripts": ['spec-reader=reader:runner']
+          "console_scripts": ['spec-reader=reader.main:runner']
       },
       zip_safe=False)
