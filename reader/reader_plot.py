@@ -1,10 +1,9 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-import os
-
 from datetime import datetime
 
-FILE_PATH = os.path.dirname(os.path.abspath(__file__)).replace("/reader", "/output/")
+from . import DATA_DIR
+
 CURRENT_DATE = datetime.strftime(datetime.now(), '%Y-%m-%d')
 
 
@@ -14,7 +13,7 @@ class Plot:
 
     def make_plot(self):
         try:
-            self.df = pd.read_csv(FILE_PATH + "/spec_data.csv")
+            self.df = pd.read_csv(DATA_DIR + "/spec_data.csv")
             x = self.df['Energy']
             y = self.df['CPS']
             fig, ax = plt.subplots(figsize=(12, 8), dpi=300)
@@ -41,7 +40,7 @@ class Plot:
 
     @staticmethod
     def save_plot():
-        plt.savefig(FILE_PATH + f"spectrum_{CURRENT_DATE}.png", dpi=300)
+        plt.savefig(DATA_DIR + f"/spectrum_{CURRENT_DATE}.png", dpi=300)
 
 
 

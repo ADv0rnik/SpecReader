@@ -1,5 +1,5 @@
 import unittest
-from reader.tests import CLEANED_DATA
+from tests import CLEANED_DATA, DATA_DIR
 
 from reader.reader_core import DataProcessor, DataLoader, DataInterface
 
@@ -12,7 +12,7 @@ class ReaderTests(unittest.TestCase):
         self.data_interface = DataInterface()
 
     def test_get_params(self):
-        with open("sample_0.spe", "r") as testdata:
+        with open(DATA_DIR + "/sample_0.spe", "r") as testdata:
             result = self.data_processor.get_param(lines=testdata.readlines())
             self.assertIsInstance(result, tuple)
 
@@ -23,13 +23,13 @@ class ReaderTests(unittest.TestCase):
 
     def test_get_params_err(self):
         try:
-            with open("sample_1.spe", "r") as testdata:
+            with open(DATA_DIR + "/sample_1.spe", "r") as testdata:
                 self.data_processor.get_param(lines=testdata.readlines())
         except ValueError as e:
             self.assertEqual(type(e), ValueError)
 
     def test_process_data(self):
         try:
-            self.data_interface.process_data("sample_2.spe", mode="r")
+            self.data_interface.process_data(DATA_DIR + "/sample_2.spe", mode="r")
         except FileNotFoundError as e:
             self.assertEqual(type(e), FileNotFoundError)
