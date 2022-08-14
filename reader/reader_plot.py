@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import os
 from datetime import datetime
+from reader.reader_logger import write_logs
 
 
 DEFAULT_DATA_DIR = os.path.dirname(__file__) + "/data"
@@ -43,9 +44,13 @@ class Plot:
     def save_plot(answer="n"):
         if answer == "n":
             plt.savefig(DEFAULT_DATA_DIR + f"/spectrum_{CURRENT_DATE}.png", dpi=300)
+            print("[+] The plot has been saved into {}".format(DEFAULT_DATA_DIR))
+            write_logs("The plot has been saved into {}".format(DEFAULT_DATA_DIR), "info")
         else:
             user_dir = input("Specify the directory to save your spectrum: ")
             plt.savefig(user_dir + f"/spectrum_{CURRENT_DATE}.png", dpi=300)
+            print("[+] The plot has been saved into {}".format(user_dir))
+            write_logs("The plot has been saved into {}".format(user_dir), "info")
 
 
 
