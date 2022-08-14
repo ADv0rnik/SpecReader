@@ -5,7 +5,7 @@ from tests import CLEANED_DATA, SAMPLE_LIST, DATA_DIR
 from reader.reader_core import DataProcessor, DataLoader, DataInterface
 
 
-@pytest.mark.parametrize("data, num_of_channels, expect", [(SAMPLE_LIST, 10, "TypeError")])
+@pytest.mark.parametrize("data, num_of_channels, expect", [(SAMPLE_LIST, 9, "TypeError")])
 def test_get_params_err(data, num_of_channels, expect):
     data_processor = DataProcessor()
     try:
@@ -14,7 +14,7 @@ def test_get_params_err(data, num_of_channels, expect):
         assert type(error) == expect
 
 
-@pytest.mark.parametrize("data, num_of_channels, expect", [(SAMPLE_LIST, 10, tuple)])
+@pytest.mark.parametrize("data, num_of_channels, expect", [(SAMPLE_LIST, 9, tuple)])
 def test_get_params(data, num_of_channels, expect):
     data_processor = DataProcessor()
     result = data_processor.get_param(lines=data, n=num_of_channels)
