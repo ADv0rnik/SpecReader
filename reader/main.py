@@ -32,7 +32,7 @@ def parse_arguments():
         "--version",
         help="Show this application's version and exit",
         action="version",
-        version="SpecReader v.0.1.6"
+        version="SpecReader v.0.1.7"
     )
     parser.add_argument(
         "-p",
