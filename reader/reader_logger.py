@@ -1,11 +1,13 @@
 import logging
-from . import DATA_DIR
+import os
+
+DEFAULT_DATA_DIR = os.path.dirname(__file__) + "/data"
 
 
 def write_logs(text: str, level_type="info"):
     logger = logging
     logger_format = "%(levelname)s %(asctime)s: %(message)s"
-    logger.basicConfig(filename=DATA_DIR + "/reader_logs.log",
+    logger.basicConfig(filename=DEFAULT_DATA_DIR + "/reader_logs.log",
                        filemode="w",
                        level=logging.INFO,
                        format=logger_format,

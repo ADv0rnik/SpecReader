@@ -13,6 +13,9 @@ from reader.reader_logger import write_logs
 from reader.reader_plot import Plot
 
 
+DEFAULT_DATA_DIR = os.path.dirname(__file__) + "/data"
+print(DEFAULT_DATA_DIR)
+
 def parse_arguments():
     """
     The method determines parser for arguments derived from the CLI.
@@ -34,7 +37,7 @@ def parse_arguments():
     parser.add_argument(
         "-p",
         "--plot",
-        help="Enable this option to show data on plot",
+        help="Enable this option to show data on plot. The default directory is {}".format(DEFAULT_DATA_DIR),
         action="store_true",
         default=''
     )
@@ -72,7 +75,8 @@ def runner():
             if args.plot:
                 plot = Plot()
                 plot.make_plot()
-                plot.save_plot()
+                answer = input(f"The default directory is {DEFAULT_DATA_DIR}. Do you want to specify another one (y/n)? ")
+                plot.save_plot(answer=answer)
             print("[+] End program")
         else:
             print("[-] Incorrect path or file doesn't exist")

@@ -1,9 +1,10 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+import os
 from datetime import datetime
 
-from . import DATA_DIR
 
+DEFAULT_DATA_DIR = os.path.dirname(__file__) + "/data"
 CURRENT_DATE = datetime.strftime(datetime.now(), '%Y-%m-%d')
 
 
@@ -13,7 +14,7 @@ class Plot:
 
     def make_plot(self):
         try:
-            self.df = pd.read_csv(DATA_DIR + "/spec_data.csv")
+            self.df = pd.read_csv(DEFAULT_DATA_DIR + "/spec_data.csv")
             x = self.df['Energy']
             y = self.df['CPS']
             fig, ax = plt.subplots(figsize=(12, 8), dpi=300)
@@ -39,8 +40,12 @@ class Plot:
         plt.show()
 
     @staticmethod
-    def save_plot():
-        plt.savefig(DATA_DIR + f"/spectrum_{CURRENT_DATE}.png", dpi=300)
+    def save_plot(answer="n"):
+        if answer == "n":
+            plt.savefig(DEFAULT_DATA_DIR + f"/spectrum_{CURRENT_DATE}.png", dpi=300)
+        else:
+            user_dir = input("Specify the directory to save your spectrum: ")
+            plt.savefig(user_dir + f"/spectrum_{CURRENT_DATE}.png", dpi=300)
 
 
 
