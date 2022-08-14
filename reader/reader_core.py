@@ -1,3 +1,5 @@
+import sys
+
 import pandas as pd
 import time
 import os
@@ -15,7 +17,7 @@ class DataProcessor:
     This class define all main functions to parse the spectrum file
     """
     @staticmethod
-    def __convert_values(value):
+    def __convert_values(value: (str, int)) -> float:
         """
         Simple static method to convert values of string or integer into float
 
@@ -25,7 +27,7 @@ class DataProcessor:
         return float(value)
 
     @staticmethod
-    def __get_lines(file):
+    def prepare_data(file):
         """
         Method allows to read lines from the spectrum file
 
@@ -34,7 +36,7 @@ class DataProcessor:
         lines = [line.strip() for line in file]
         return lines
 
-    def get_param(self, lines, n=NUM_CHANNELS):
+    def get_param(self, lines: list, n=NUM_CHANNELS) -> tuple:
         """
         The method parse all required parameters (see Returns description below) from the spectrum file
 
@@ -48,7 +50,6 @@ class DataProcessor:
                            within one single measurement
                   energy_list - list[int], an energy value in each single channel
         """
-        lines = self.__get_lines(lines)
         date_mea = ''
         time_mea = 0
         cps = 0.0
@@ -94,7 +95,8 @@ class DataLoader:
         self.__all_params = None
 
     def set_all_parameters(self, file):
-        self.__all_params = self.__data_processor.get_param(file)
+        lines = self.__data_processor.prepare_data(file)
+        self.__all_params = self.__data_processor.get_param(lines)
 
     @staticmethod
     def get_dataframe(data):
@@ -126,6 +128,7 @@ class DataInterface:
 
     def process_data(self, specfile: str, mode="r") -> tuple:
         try:
+            assert specfile.endswith(".spe")
             with open(specfile, mode) as file:
                 print("[+] Opening spectrum file")
                 write_logs("Opening spectrum file", "info")
@@ -134,6 +137,10 @@ class DataInterface:
         except FileNotFoundError as err:
             print(f"[-] An error occurred: {err}")
             write_logs(f"{err}", 'error')
+        except AssertionError as err:
+            print(f"[-] An error occurred: {err.__class__}")
+            write_logs(f"{err.__class__}", 'error')
+            sys.exit()
         else:
             return self.__data_loader.all_params
 

@@ -1,32 +1,36 @@
 import unittest
-from tests import CLEANED_DATA, DATA_DIR
 
+import pytest
+from tests import CLEANED_DATA, SAMPLE_LIST, DATA_DIR
 from reader.reader_core import DataProcessor, DataLoader, DataInterface
+
+
+@pytest.mark.parametrize("data, num_of_channels, expect", [(SAMPLE_LIST, 10, "TypeError")])
+def test_get_params_err(data, num_of_channels, expect):
+    data_processor = DataProcessor()
+    try:
+        data_processor.get_param(lines=data, n=num_of_channels)
+    except TypeError as error:
+        assert type(error) == expect
+
+
+@pytest.mark.parametrize("data, num_of_channels, expect", [(SAMPLE_LIST, 10, tuple)])
+def test_get_params(data, num_of_channels, expect):
+    data_processor = DataProcessor()
+    result = data_processor.get_param(lines=data, n=num_of_channels)
+    assert type(result) == expect
 
 
 class ReaderTests(unittest.TestCase):
 
     def setUp(self):
-        self.data_processor = DataProcessor()
         self.data_loader = DataLoader()
         self.data_interface = DataInterface()
 
-    def test_get_params(self):
-        with open(DATA_DIR + "/sample_0.spe", "r") as testdata:
-            result = self.data_processor.get_param(lines=testdata.readlines())
-            self.assertIsInstance(result, tuple)
-
     def test_get_dataframe(self):
         result = len(self.data_loader.get_dataframe(CLEANED_DATA))
-        expected_resul = 1024
+        expected_resul = 6
         self.assertEqual(result, expected_resul)
-
-    def test_get_params_err(self):
-        try:
-            with open(DATA_DIR + "/sample_1.spe", "r") as testdata:
-                self.data_processor.get_param(lines=testdata.readlines())
-        except ValueError as e:
-            self.assertEqual(type(e), ValueError)
 
     def test_process_data(self):
         try:

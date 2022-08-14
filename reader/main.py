@@ -14,7 +14,7 @@ from reader.reader_plot import Plot
 
 
 DEFAULT_DATA_DIR = os.path.dirname(__file__) + "/data"
-print(DEFAULT_DATA_DIR)
+
 
 def parse_arguments():
     """
