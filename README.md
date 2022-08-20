@@ -82,8 +82,8 @@ ___] |    |___ |___    |  \ |___ |  | |__/ |___ |  \
 [+] Opening spectrum file
 [+] Fetching parameters...
 100%|████████████████████| 5/5 [00:02<00:00,  1.99it/s]                                                                                                   
-The default directory is /home/aliaksandr/PycharmProjects/spec-reader/reader/data. Do you want to specify another one (y/n)? n
-[+] The plot has been saved into /home/aliaksandr/PycharmProjects/spec-reader/reader/data
+The default directory is /home/default/PycharmProjects/spec-reader/reader/data. Do you want to specify another one (y/n)? n
+[+] The plot has been saved into /home/default/PycharmProjects/spec-reader/reader/data
 [+] End program
 ```
 
