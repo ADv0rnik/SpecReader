@@ -1,7 +1,7 @@
 import unittest
 
 import pytest
-from tests import CLEANED_DATA, SAMPLE_LIST, DATA_DIR
+from . import CLEANED_DATA, SAMPLE_LIST, DATA_DIR
 from reader.reader_core import DataProcessor, DataLoader, DataInterface
 
 
