@@ -25,7 +25,6 @@ matplotlib
 tqdm
 ```
 
-
 ### Installation 
 The Spec-Reader has been tested on Windows and UNIX-based systems (Ubuntu v.20.04).
 There are two ways to install the program on your machine: 1 - by extracting all files from "reader" directory (the root)
@@ -58,11 +57,11 @@ In this case you may trigger the installation manually by using the following co
 
 ### Usage
 
-To start working with Spec-Reader run CLI command `spec-reader`. The following options are available:
+To run Spec-Reader run CLI command `spec-reader`. The following options are available:
 
 `usage: spec-reader [-h] [-v] [-p] path`
 
-* `path` - is a mandatory argument (absolute path to spectrum file to be treated) 
+* `path` - is a mandatory argument (path to spectrum file to be treated) 
 * `-h, --help` - show help
 * `-v, --version` - show application's version
 * `-p, --plot` - make plot from data
