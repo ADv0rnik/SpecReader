@@ -90,3 +90,6 @@ The default directory is /home/default/PycharmProjects/spec-reader/reader/data. 
 ### Outputs
 
 The Spec-reader provides data about spectrum in .csv format and plot in .png format (when --plot argument is on)
+The latest version of Spec-Reader package can be downloaded from test.pypi.org by using the following command
+
+`pip install -i https://test.pypi.org/simple/ spec-reader==0.1.7`
