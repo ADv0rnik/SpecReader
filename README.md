@@ -17,11 +17,13 @@ you may want to update it. In this case use the following [guideline](https://li
 
 The list of packages required for Spec-Reader is presented in `requirements.txt`
 
-`art`
-`pandas`
-`pytest`
-`matplotlib`
-`tqdm`
+```commandline
+art
+pandas
+pytest
+matplotlib
+tqdm
+```
 
 ### Installation 
 The Spec-Reader has been tested on Windows and UNIX-based systems (Ubuntu v.20.04).
@@ -64,4 +66,27 @@ To run Spec-Reader run CLI command `spec-reader`. The following options are avai
 * `-v, --version` - show application's version
 * `-p, --plot` - make plot from data
 
+The CLI command can be combined with `-p` or `--plot` arguments. For example (for Ubuntu OS):
 
+`spec-reader -p /home/my-comuter/some-directory/sample.spe`
+
+Example of program's working cycle is presented below
+
+```commandline
+____ ___  ____ ____    ____ ____ ____ ___  ____ ____ 
+[__  |__] |___ |       |__/ |___ |__| |  \ |___ |__/ 
+___] |    |___ |___    |  \ |___ |  | |__/ |___ |  \ 
+
+
+[+] Run program
+[+] Opening spectrum file
+[+] Fetching parameters...
+100%|████████████████████| 5/5 [00:02<00:00,  1.99it/s]                                                                                                   
+The default directory is /home/aliaksandr/PycharmProjects/spec-reader/reader/data. Do you want to specify another one (y/n)? n
+[+] The plot has been saved into /home/aliaksandr/PycharmProjects/spec-reader/reader/data
+[+] End program
+```
+
+### Outputs
+
+The Spec-reader provides data about spectrum in .csv format and plot in .png format (when --plot argument is on)
