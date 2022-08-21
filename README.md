@@ -47,7 +47,7 @@ to your local machine; 2 - install package from [PyPi test repo](https://test.py
 
 To install Spec-Reader package form PyPi Test repo use the following command:
 
-`pip install -i https://test.pypi.org/simple/ spec-reader==0.1.6`
+`pip install -i https://test.pypi.org/simple/ spec-reader==0.1.7`
 
 Possible issues during the installation:
 If requirements installation won't run automatically make sure that all required packages are installed in your virtual env.
