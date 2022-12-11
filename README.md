@@ -70,7 +70,7 @@ The CLI command can be combined with `-p` or `--plot` arguments. For example (fo
 
 `spec-reader -p /home/my-comuter/some-directory/sample.spe`
 
-Example of program's working cycle is presented below
+Example of program workflow is presented below
 
 ```commandline
 ____ ___  ____ ____    ____ ____ ____ ___  ____ ____ 
