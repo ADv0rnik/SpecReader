@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import os
 from datetime import datetime
-from reader.reader_logger import write_logs
+from reader_logger import write_logs
 
 
 DEFAULT_DATA_DIR = os.path.dirname(__file__) + "/data"
