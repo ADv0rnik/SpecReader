@@ -11,7 +11,7 @@ The spec-reader is presented in form of CLI application. Current version of the 
 
 ### Requirements
 
-The spec-reader require Python version 3.8 or higher. For Windows users the oldest version of python interpreter can be found
+The spec-reader require Python version 3.8 or older. For Windows users the oldest version of python interpreter can be found
 here [http://www.python.org](http://www.python.org.). Python interpreter is usually pre-installed on Ubuntu Linux. However,
 you may want to update it. In this case use the following [guideline](https://linuxize.com/post/how-to-install-python-3-9-on-ubuntu-20-04/)
 
