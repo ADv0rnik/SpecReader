@@ -8,9 +8,9 @@ import sys
 import time
 import argparse
 
-from reader.reader_core import DataInterface
-from reader.reader_logger import write_logs
-from reader.reader_plot import Plot
+from reader_core import DataInterface
+from reader_logger import write_logs
+from reader_plot import Plot
 
 
 DEFAULT_DATA_DIR = os.path.dirname(__file__) + "/data"
