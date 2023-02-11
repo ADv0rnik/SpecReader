@@ -4,3 +4,4 @@ pytest-cov
 matplotlib~=3.6
 tqdm~=4.64.0
 setuptools~=64.0.3
+pymc3~=3.11.4
