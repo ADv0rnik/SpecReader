@@ -8,9 +8,9 @@ import sys
 import time
 import argparse
 
-from reader_core import DataInterface
-from reader_logger import write_logs
-from reader_plot import Plot
+from src.reader_core import DataInterface
+from src.reader_logger import write_logs
+from src.reader_plot import Plot
 
 
 DEFAULT_DATA_DIR = os.path.dirname(__file__) + "/data"
@@ -24,7 +24,7 @@ def parse_arguments():
     :returns: arguments passed on CLI script call
 
     """
-    parser = argparse.ArgumentParser(prog='spec-reader',
+    parser = argparse.ArgumentParser(prog='spec-src',
                                      description="List of commands for SpecReader",
                                      epilog="Report about all bugs to aadvornik@gmail.com")
     parser.add_argument(

@@ -5,7 +5,7 @@ import time
 import os
 from tqdm import tqdm
 
-from .reader_logger import write_logs
+from reader_logger import write_logs
 
 NUM_CHANNELS = 1023
 DEFAULT_DATA_DIR = os.path.dirname(__file__) + "/data"

@@ -2,7 +2,7 @@ import unittest
 
 import pytest
 from . import CLEANED_DATA, SAMPLE_LIST, DATA_DIR
-from reader.reader_core import DataProcessor, DataLoader, DataInterface
+from src.reader_core import DataProcessor, DataLoader, DataInterface
 
 
 @pytest.mark.parametrize("data, num_of_channels, expect", [(SAMPLE_LIST, 9, "TypeError")])

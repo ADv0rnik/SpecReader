@@ -1,5 +1,5 @@
 '''
-This package contain files for structuring reader
+This package contain files for structuring src
 '''
 
 from art import tprint
