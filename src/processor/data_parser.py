@@ -12,6 +12,7 @@ class DataParser:
     def read_from_file(self, file, queue_: Queue):
         counts = []
         head_tail = os.path.split(file)
+        dir_name = head_tail[0].split(os.sep)[-1]
         with open(file, 'r') as f:
             lines = [line.strip() for line in f]
             for i, line in enumerate(lines):
@@ -26,4 +27,4 @@ class DataParser:
                 else:
                     break
             counts.append(live_time)
-            queue_.put({head_tail[1]: counts})
+            queue_.put({f"{dir_name}_{head_tail[1]}": counts})
