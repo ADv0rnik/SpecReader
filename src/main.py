@@ -68,9 +68,9 @@ def runner():
         src_path = args.Path
 
         if args.out.endswith(OUTPUT_FORMAT):
-            output_dir = os.path.join(os.path.split(src_path)[0], args.out)
+            output_path = os.path.join(os.path.split(src_path)[0], args.out)
         else:
-            output_dir = os.path.join(os.path.split(src_path)[0], args.out + OUTPUT_FORMAT)
+            output_path = os.path.join(os.path.split(src_path)[0], args.out + OUTPUT_FORMAT)
 
         files = list_files(src_path, FFORMAT)
         threads = [threading.Thread(target=data_parser.read_from_file, args=(file, data_queue, )) for file in files]
@@ -85,16 +85,16 @@ def runner():
         while not data_queue.empty():
             results.update(data_queue.get())
 
-        dataframe = save_to_dataframe(output_dir, results)
+        dataframe = save_to_dataframe(output_path, results)
         return dataframe
 
-def save_to_dataframe(output_dir, data):
+def save_to_dataframe(output_path_name, data):
     df = pd.DataFrame.from_dict(data, orient='index')
     df = df.transpose()
     df = df.rename(index={df.index[-1]: "LT"})
-    df.to_csv(output_dir)
-    print(f"[+] The data has been saved into: {output_dir}")
-    write_logs(f"[+] The data has been saved into: {output_dir}", 'info')
+    df.to_csv(output_path_name)
+    print(f"[+] The data has been saved into: {output_path_name}")
+    write_logs(f"[+] The data has been saved into: {output_path_name}", 'info')
     return df
 
 
