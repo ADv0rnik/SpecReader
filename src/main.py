@@ -3,6 +3,8 @@ import os
 import queue
 import sys
 import threading
+from email.policy import default
+
 import pandas as pd
 
 from typing import List
@@ -42,6 +44,12 @@ def parse_arguments():
         type=str,
         help='The path to spectrum file'
     )
+    parser.add_argument(
+        "-f", "--format",
+        type=str,
+        help='Format of the spectrum file',
+        default=FFORMAT
+    )
     return parser.parse_args()
 
 
@@ -56,6 +64,8 @@ def list_files(source_path: str, file_format: str) -> List[str]:
 
 
 def runner():
+    print("[+] Run program")
+    write_logs("Start program")
     try:
         args = parse_arguments()
     except argparse.ArgumentError as err:
@@ -72,7 +82,12 @@ def runner():
         else:
             output_path = os.path.join(os.path.split(src_path)[0], args.out + OUTPUT_FORMAT)
 
-        files = list_files(src_path, FFORMAT)
+        if not args.format == FFORMAT:
+            format_ = args.format
+        else:
+            format_ = FFORMAT
+
+        files = list_files(src_path, format_)
         threads = [threading.Thread(target=data_parser.read_from_file, args=(file, data_queue, )) for file in files]
 
         for thread in threads:
@@ -85,20 +100,23 @@ def runner():
         while not data_queue.empty():
             results.update(data_queue.get())
 
-        dataframe = save_to_dataframe(output_path, results)
-        return dataframe
+        save_to_dataframe(output_path, results)
+
 
 def save_to_dataframe(output_path_name, data):
-    df = pd.DataFrame.from_dict(data, orient='index')
-    df = df.transpose()
-    df = df.rename(index={df.index[-1]: "LT"})
-    df.to_csv(output_path_name)
-    print(f"[+] The data has been saved into: {output_path_name}")
-    write_logs(f"[+] The data has been saved into: {output_path_name}", 'info')
-    return df
+    try:
+        df = pd.DataFrame.from_dict(data, orient='index')
+        df = df.transpose()
+        df.index += 1
+        df = df.rename(index={df.index[-1]: "LT"})
+        df.to_csv(output_path_name, mode="w")
+    except Exception as err:
+        print(f"[-] The data cannot be saved into: {output_path_name}")
+        write_logs(f"[-] The data cannot be saved into: {output_path_name} due to {err}", "error")
+    else:
+        print(f"[+] The data has been saved into: {output_path_name}")
+        write_logs(f"[+] The data has been saved into: {output_path_name}", "info")
 
 
 if __name__ == "__main__":
-    print("[+] Run program")
-    write_logs("Start program")
     runner()
