@@ -3,7 +3,7 @@ import os
 import queue
 import sys
 import threading
-from email.policy import default
+import traceback
 
 import pandas as pd
 
@@ -110,9 +110,12 @@ def save_to_dataframe(output_path_name, data):
         df.index += 1
         df = df.rename(index={df.index[-1]: "LT"})
         df.to_csv(output_path_name, mode="w")
+    except IndexError as err:
+        print(f"[-] The {err} occurred during dataframe processing")
+        write_logs(f"[-] The {err} occurred during dataframe processing due to {traceback.format_exc()}", "error")
     except Exception as err:
         print(f"[-] The data cannot be saved into: {output_path_name}")
-        write_logs(f"[-] The data cannot be saved into: {output_path_name} due to {err}", "error")
+        write_logs(f"[-] The data cannot be saved into: {output_path_name} due to {traceback.format_exc()}", "error")
     else:
         print(f"[+] The data has been saved into: {output_path_name}")
         write_logs(f"[+] The data has been saved into: {output_path_name}", "info")

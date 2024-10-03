@@ -1,6 +1,4 @@
-import argparse
 import unittest
-from unittest import mock
 
 import pandas as pd
 import pytest
@@ -8,6 +6,7 @@ import pytest
 from src.processor.data_parser import DataParser
 from src.main import save_to_dataframe, parse_arguments
 from argparse import Namespace
+
 
 @pytest.fixture(scope="session")
 def mk_tmp_dir(tmp_path_factory):
