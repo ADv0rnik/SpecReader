@@ -1,4 +1,4 @@
-![GitHub repo file count](https://img.shields.io/github/directory-file-count/ADv0rnik/SpecReader?style=flat-square) ![GitHub language count](https://img.shields.io/github/languages/count/ADv0rnik/SpecReader?style=flat-square) ![Tests](https://github.com/mCodingLLC/SlapThatLikeButton-SpecReader/actions/workflows/tests.yml/badge.svg) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/ADv0rnik/SpecReader?style=flat-square) [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3100/)
+![GitHub repo file count](https://img.shields.io/github/directory-file-count/ADv0rnik/SpecReader?style=flat-square) ![GitHub language count](https://img.shields.io/github/languages/count/ADv0rnik/SpecReader?style=flat-square) ![Tests](https://github.com/ADv0rnik/SpecReader/actions/workflows/tests.yml/badge.svg) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/ADv0rnik/SpecReader?style=flat-square) [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3100/)
 
 ## SpecReader
 ### General information
