@@ -1,19 +1,23 @@
-![GitHub repo file count](https://img.shields.io/github/directory-file-count/ADv0rnik/SpecReader?style=flat-square) ![GitHub language count](https://img.shields.io/github/languages/count/ADv0rnik/SpecReader?style=flat-square) ![Tests](https://github.com/mCodingLLC/SlapThatLikeButton-TestingStarterProject/actions/workflows/tests.yml/badge.svg) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/ADv0rnik/SpecReader?style=flat-square) [![Python 3.10](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3100/)
+![GitHub repo file count](https://img.shields.io/github/directory-file-count/ADv0rnik/SpecReader?style=flat-square) ![GitHub language count](https://img.shields.io/github/languages/count/ADv0rnik/SpecReader?style=flat-square) ![Tests](https://github.com/mCodingLLC/SlapThatLikeButton-SpecReader/actions/workflows/tests.yml/badge.svg) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/ADv0rnik/SpecReader?style=flat-square) [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3100/)
 
 ## SpecReader
 ### General information
-The Spec-reader utility was designed to read spectrum data (in .spe format) from radiation detection device produced by 
-ATOMTEX (Belarus) and transform it into spectrogram. The program was tested on data from the following models:
+The Spec-reader utility was designed to read spectrum data (in .spe format) from radiation detection devices and transform it into a human-readable format (.csv). The program was tested on data from GammaVision v.7.01 and detectors produced by ATOMTEX Inc. (Belarus). 
+
+The following models were used for testing:
 - [AT6101DR Spectrometer](https://atomtex.com/en/at6101dr-spectrometer)
 - [AT6101C Spectrometer](https://atomtex.com/en/portable-spectrometers-backpack-based-radiation-detectors-brd/at6101c-at6101cm-spectrometers)
 
-The spec-reader is presented in form of CLI application. Current version of the application is 0.1.7. Current version includes basic functionality like parser implemented by core.py, plot representation implemented by plot.py, cli basic commands - help, version, plot (see description below) 
+The spec-reader is presented as a CLI application. The current version of the application is [0.2.1](https://github.com/ADv0rnik/SpecReader/tree/v.0.2.1). This version includes basic functionality such as:
+
+- A parser implemented in data_parser.py
+- Basic CLI commands: help, version, out and format (see description below)
 
 ### Requirements
 
-The spec-reader require Python version 3.8 or older. For Windows users the oldest version of python interpreter can be found
-here [http://www.python.org](http://www.python.org.). Python interpreter is usually pre-installed on Ubuntu Linux. However,
-you may want to update it. In this case use the following [guideline](https://linuxize.com/post/how-to-install-python-3-9-on-ubuntu-20-04/)
+The spec-reader requires Python version 3.10 or older. For Windows users, the oldest Python interpreter can be found
+here: http://www.python.org (http://www.python.org/). While Python is typically pre-installed on Ubuntu Linux, you might want to update it.
+If so, follow these [steps](https://www.debugpoint.com/install-python-3-12-ubuntu/)
 
 The list of packages required for Spec-Reader is presented in `requirements.txt`
 
@@ -22,17 +26,24 @@ art
 pandas
 pytest
 matplotlib
-tqdm
+numpy
 ```
 
 ### Installation 
-The Spec-Reader has been tested on Windows and UNIX-based systems (Ubuntu v.20.04).
-There are two ways to install the program on your machine: 1 - by extracting all files from "reader" directory (the root)
-to your local machine; 2 - install package from [PyPi test repo](https://test.pypi.org/project/spec-reader/).
+The Spec-Reader has been tested on Windows 11, macOS, and Ubuntu 20.04. You can install it on your machine in two ways:
+- Extract all files from the "reader" directory (the root) to your local machine; 
+- Install the package from [PyPi test repo](https://test.pypi.org/project/spec-reader/).
 
-1 - Extract root directory of script with all files and subdirectories to a local directory
+1 - Clone the github repo with all files and subdirectories to a local directory:
+```commandline
+git clone https://github.com/ADv0rnik/SpecReader.git
+```
+or
+```commandline
+git clone git@github.com:ADv0rnik/SpecReader.git
+```
 
-2 - Run terminal. Install and activate virtual environment:
+2 - Open a terminal or command prompt in the directory where you extracted the Spec-Reader files. Create and activate a virtual environment:
 
      for UNIX-based systems:
        python -m venv venv
@@ -45,30 +56,37 @@ to your local machine; 2 - install package from [PyPi test repo](https://test.py
 
     pip install -r requirements.txt`
 
-To install Spec-Reader package form PyPi Test repo use the following command:
+To install the Spec-Reader package from the PyPI Test repository, use the following command::
 
-`pip install -i https://test.pypi.org/simple/ spec-reader==0.1.7`
+```commandline
+pip install -i https://test.pypi.org/simple/ spec-reader==0.1.7
+```
 
-Possible issues during the installation:
-If requirements installation won't run automatically make sure that all required packages are installed in your virtual env.
-In this case you may trigger the installation manually by using the following command:
 
-`pip install <package name>`
+#### Possible issues during installation:
+If the requirements installation does not run automatically, make sure that all required packages are installed in your virtual environment.
+
+In this case, you can trigger the installation manually by using the following command:
+
+```commandline
+pip install <package name>
+```
 
 ### Usage
 
 To run Spec-Reader run CLI command `spec-reader`. The following options are available:
 
-`usage: spec-reader [-h] [-v] [-p] path`
+`usage: spec-reader [-h] [-v] path`
 
 * `path` - is a mandatory argument (path to spectrum file to be treated) 
 * `-h, --help` - show help
 * `-v, --version` - show application's version
-* `-p, --plot` - make plot from data
+* `-o, --out` - specify the name for the output file. If name is not specified the default filename will be applied
+* `-f, --format` - specify the format of the input files (*.spe or *.Spe). *.Spe is using by default
 
-The CLI command can be combined with `-p` or `--plot` arguments. For example (for Ubuntu OS):
+The CLI command can be combined with `-f` or `-o` flags. For example:
 
-`spec-reader -p /home/my-comuter/some-directory/sample.spe`
+`spec-reader c:\20240925\ -f Spe -o cs_data`
 
 Example of program workflow is presented below
 
@@ -76,20 +94,15 @@ Example of program workflow is presented below
 ____ ___  ____ ____    ____ ____ ____ ___  ____ ____ 
 [__  |__] |___ |       |__/ |___ |__| |  \ |___ |__/ 
 ___] |    |___ |___    |  \ |___ |  | |__/ |___ |  \ 
-
+                                                     
 
 [+] Run program
-[+] Opening spectrum file
-[+] Fetching parameters...
-100%|████████████████████| 5/5 [00:02<00:00,  1.99it/s]                                                                                                   
-The default directory is /home/default/PycharmProjects/spec-reader/reader/data. Do you want to specify another one (y/n)? n
-[+] The plot has been saved into /home/default/PycharmProjects/spec-reader/reader/data
-[+] End program
+usage: spec-src [-h] [-v] [-o OUT] [-f FORMAT] path
+spec-src: error: the following arguments are required: path
 ```
 
 ### Outputs
 
-The Spec-reader provides data about spectrum in .csv format and plot in .png format (when --plot argument is on)
-The latest version of Spec-Reader package can be downloaded from test.pypi.org by using the following command
+The Spec-Reader provides data about spectra in .csv format. The latest version of the Spec-Reader package can be downloaded from test.pypi.org by using the following command:
 
 `pip install -i https://test.pypi.org/simple/ spec-reader==0.1.7`
