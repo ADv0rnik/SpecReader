@@ -1,0 +1,12 @@
+.venv
+.idea
+__pycache__
+/build
+/dist
+/*.egg-info
+
+tmp.py
+*.Spe
+*.spe
+*.csv
+*.log

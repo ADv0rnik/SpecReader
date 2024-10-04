@@ -1,39 +1,33 @@
 import unittest
-
 import pytest
-from . import CLEANED_DATA, SAMPLE_LIST, DATA_DIR
-from reader.reader_core import DataProcessor, DataLoader, DataInterface
+from numpy.ma.testutils import assert_equal
+
+from src.processor.data_parser import DataParser
+from src.main import save_to_dataframe
 
 
-@pytest.mark.parametrize("data, num_of_channels, expect", [(SAMPLE_LIST, 9, "TypeError")])
-def test_get_params_err(data, num_of_channels, expect):
-    data_processor = DataProcessor()
-    try:
-        data_processor.get_param(lines=data, n=num_of_channels)
-    except TypeError as error:
-        assert type(error) == expect
+
+@pytest.fixture(scope="session")
+def mk_tmp_dir(tmp_path_factory):
+    dir_ = tmp_path_factory.mktemp("tmp") / "tmp.csv"
+    return dir_
 
 
-@pytest.mark.parametrize("data, num_of_channels, expect", [(SAMPLE_LIST, 9, tuple)])
-def test_get_params(data, num_of_channels, expect):
-    data_processor = DataProcessor()
-    result = data_processor.get_param(lines=data, n=num_of_channels)
-    assert type(result) == expect
+def test_save_to_dataframe(mk_tmp_dir):
+    test_dict =  {'test_data.Spe': [0, 0, 0, 0, 0, 14, 907, 2486, 2363, 1972, 1810, 1691, 1767, 2021, 0, 378]}
+    test_none = None
+    save_to_dataframe(mk_tmp_dir, test_dict)
+    save_to_dataframe(mk_tmp_dir, test_none)
+
 
 
 class ReaderTests(unittest.TestCase):
 
     def setUp(self):
-        self.data_loader = DataLoader()
-        self.data_interface = DataInterface()
+        self.data_parser = DataParser()
+        self.test_line = "144 146 "
 
-    def test_get_dataframe(self):
-        result = len(self.data_loader.get_dataframe(CLEANED_DATA))
-        expected_resul = 6
-        self.assertEqual(result, expected_resul)
-
-    def test_process_data(self):
-        try:
-            self.data_interface.process_data(DATA_DIR + "/sample_2.spe", mode="r")
-        except FileNotFoundError as e:
-            self.assertEqual(type(e), FileNotFoundError)
+    def test_split_line(self):
+        result = self.data_parser.split_line(self.test_line)
+        assert_equal(result, ['144', '146'])
+        assert_equal(isinstance(result, list), True)
