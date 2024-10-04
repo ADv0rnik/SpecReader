@@ -8,7 +8,7 @@ The following models were used for testing:
 - [AT6101DR Spectrometer](https://atomtex.com/en/at6101dr-spectrometer)
 - [AT6101C Spectrometer](https://atomtex.com/en/portable-spectrometers-backpack-based-radiation-detectors-brd/at6101c-at6101cm-spectrometers)
 
-The spec-reader is presented as a CLI application. The current version of the application is [0.2.1](https://github.com/ADv0rnik/SpecReader/tree/v.0.2.1). This version includes basic functionality such as:
+The spec-reader is presented as a CLI application. The current version of the application is [0.2.2](https://github.com/ADv0rnik/SpecReader/tree/v.0.2.2). This version includes basic functionality such as:
 
 - A parser implemented in data_parser.py
 - Basic CLI commands: help, version, out and format (see description below)
@@ -59,7 +59,7 @@ git clone git@github.com:ADv0rnik/SpecReader.git
 To install the Spec-Reader package from the PyPI Test repository, use the following command::
 
 ```commandline
-pip install -i https://test.pypi.org/simple/ spec-reader==0.1.7
+pip install -i https://test.pypi.org/simple/ spec-reader==0.2.2
 ```
 
 
@@ -105,4 +105,4 @@ spec-src: error: the following arguments are required: path
 
 The Spec-Reader provides data about spectra in .csv format. The latest version of the Spec-Reader package can be downloaded from test.pypi.org by using the following command:
 
-`pip install -i https://test.pypi.org/simple/ spec-reader==0.1.7`
+`pip install -i https://test.pypi.org/simple/ spec-reader==0.2.2`
