@@ -10,3 +10,4 @@ tmp.py
 *.spe
 *.csv
 *.log
+/.pypirc
