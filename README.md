@@ -30,7 +30,7 @@ numpy
 ```
 
 ### Installation 
-The Spec-Reader has been tested on Windows 11, macOS, and Ubuntu 20.04. You can install it on your machine in two ways:
+The Spec-Reader has been tested on Windows 11 and Ubuntu 20.04. You can install it on your machine in two ways:
 - Extract all files from the "reader" directory (the root) to your local machine; 
 - Install the package from [PyPi test repo](https://test.pypi.org/project/spec-reader/).
 
